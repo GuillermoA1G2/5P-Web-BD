@@ -42,30 +42,35 @@ function Form() {
             {isLoggedIn ? (
                 <Data email={email} isLoggedIn={isLoggedIn} />
             ) : (
-                <section className="formContainer">
-                    <span className="inputContainer">
-                        <label htmlFor="email">Email:</label>
-                        <input
-                            type="email"
-                            id="email"
-                            name="email"
-                            value={email}
-                            onChange={handleInputChange(setEmail)}
-                        />
-                    </span>
-                    <span className="inputContainer">
-                        <label htmlFor="password">Contraseña:</label>
-                        <input
-                            type="password"
-                            id="password"
-                            name="password"
-                            value={password}
-                            onChange={handleInputChange(setPassword)}
-                        />
-                    </span>
-                    <button onClick={handleLogin}>Iniciar sesión</button>
-                    <button onClick={handleRegister}>Registrarse</button>
-                </section>
+                <div className="card">
+                    <h1 className="title">Iniciar Sesión</h1>
+                    <form className="login">
+                        <span className="inputContainer">
+                            <label htmlFor="email">Email:</label>
+                            <input
+                                type="email"
+                                id="email"
+                                name="email"
+                                value={email}
+                                onChange={handleInputChange(setEmail)}
+                                className="input"
+                            />
+                        </span>
+                        <span className="inputContainer">
+                            <label htmlFor="password">Contraseña:</label>
+                            <input
+                                type="password"
+                                id="password"
+                                name="password"
+                                value={password}
+                                onChange={handleInputChange(setPassword)}
+                                className="input"
+                            />
+                        </span>
+                        <button onClick={handleLogin} className="btn">Iniciar sesión</button>
+                        <button onClick={handleRegister} className="btn">Registrarse</button>
+                    </form>
+                </div>
             )}
         </>
     );
