@@ -2,10 +2,10 @@ import React, { useState } from "react";
 import "./Form.css";
 import Data from "./Data";
 
+
+
 const initialUsers = [
     { email: 'a22110067@ceti.mx', password: '22110067' },
-    { email: 'a22110055@ceti.mx', password: '22110055' },
-    // Puedes agregar más usuarios aquí
 ];
 
 function Form() {
@@ -37,36 +37,40 @@ function Form() {
         setPassword("");
     }
 
+    const redirectToPage = () => {
+        window.location.href = "./src/components/PlayList/PlayList.tsx";
+    }
+
     return (
         <>
             {isLoggedIn ? (
-                <Data email={email} isLoggedIn={isLoggedIn} />
+                redirectToPage()
             ) : (
-                <div className="card">
-                    <h1 className="title">Iniciar Sesión</h1>
-                    <form className="login">
-                        <span className="inputContainer">
-                            <label htmlFor="email">Email:</label>
+                <div className="login-box">
+                    <h2>Login</h2>
+                    <form>
+                        <div className="user-box">
                             <input
                                 type="email"
                                 id="email"
                                 name="email"
                                 value={email}
                                 onChange={handleInputChange(setEmail)}
-                                className="input"
+                                required
                             />
-                        </span>
-                        <span className="inputContainer">
-                            <label htmlFor="password">Contraseña:</label>
+                            <label>Email</label>
+                        </div>
+                        <div className="user-box">
                             <input
                                 type="password"
                                 id="password"
                                 name="password"
                                 value={password}
                                 onChange={handleInputChange(setPassword)}
-                                className="input"
+                                required
                             />
-                        </span>
+                            <label>Password</label>
+                        </div>
                         <button onClick={handleLogin} className="btn">Iniciar sesión</button>
                         <button onClick={handleRegister} className="btn">Registrarse</button>
                     </form>
