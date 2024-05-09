@@ -1,8 +1,9 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import "./Form.css";
 import Data from "./Data";
+import Playlist from "../PlayList/PlayList"
 
-
+const API_URL = "http://localhost:5173";
 
 const initialUsers = [
     { email: 'a22110067@ceti.mx', password: '22110067' },
@@ -13,6 +14,12 @@ function Form() {
     const [password, setPassword] = useState("");
     const [isLoggedIn, setIsLoggedIn] = useState(false);
     const [users, setUsers] = useState(initialUsers);
+
+    /*useEffect(() => {
+        const userInStorageString = window.localStorage.getItem("user");
+        const userInStorage = JSON.parse(userInStorageString);
+        setUsers(userInStorage);
+    }, [])*/
 
     const handleInputChange = (setState) => {
         return (event) => {
@@ -41,10 +48,12 @@ function Form() {
         window.location.href = "./src/components/PlayList/PlayList.tsx";
     }
 
+
+
     return (
         <>
             {isLoggedIn ? (
-                redirectToPage()
+                <Playlist/>
             ) : (
                 <div className="login-box">
                     <h2>Login</h2>
