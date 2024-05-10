@@ -3,7 +3,6 @@ import './style.css';
 
 const PlayList: React.FC = () => {
   const togglePlayPause = () => {
-    // Lógica para alternar entre reproducir y pausar la canción
   };
 
   return (

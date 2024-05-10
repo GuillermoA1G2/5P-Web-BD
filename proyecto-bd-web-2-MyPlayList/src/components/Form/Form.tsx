@@ -1,13 +1,11 @@
 import React, { useEffect, useState } from "react";
 import "./Form.css";
-import Data from "./Data";
-import Playlist from "../PlayList/PlayList"
+import Playlist from "../PlayList/PlayList";
 
 const API_URL = "http://localhost:5173";
 
-const initialUsers = [
-    { email: 'a22110067@ceti.mx', password: '22110067' },
-];
+// Eliminando el usuario predefinido
+const initialUsers = [];
 
 function Form() {
     const [email, setEmail] = useState("");
@@ -15,17 +13,19 @@ function Form() {
     const [isLoggedIn, setIsLoggedIn] = useState(false);
     const [users, setUsers] = useState(initialUsers);
 
-    /*useEffect(() => {
-        const userInStorageString = window.localStorage.getItem("user");
+    useEffect(() => {
+        const userInStorageString = window.localStorage.getItem("users");
         const userInStorage = JSON.parse(userInStorageString);
-        setUsers(userInStorage);
-    }, [])*/
+        if (userInStorage) {
+            setUsers(userInStorage);
+        }
+    }, []);
 
     const handleInputChange = (setState) => {
         return (event) => {
             setState(event.target.value);
-        }
-    }
+        };
+    };
 
     const handleLogin = () => {
         const foundUser = users.find(user => user.email === email && user.password === password);
@@ -34,21 +34,23 @@ function Form() {
         } else {
             alert("Correo electrónico o contraseña incorrectos");
         }
-    }
+    };
 
     const handleRegister = () => {
+        // Verificando si el usuario ya existe
+        const userExists = users.some(user => user.email === email);
+        if (userExists) {
+            alert("El usuario ya está registrado");
+            return;
+        }
         const newUser = { email, password };
-        setUsers([...users, newUser]);
+        const updatedUsers = [...users, newUser];
+        setUsers(updatedUsers);
+        window.localStorage.setItem("users", JSON.stringify(updatedUsers)); // Actualiza el localStorage
         alert("Usuario registrado correctamente");
         setEmail("");
         setPassword("");
-    }
-
-    const redirectToPage = () => {
-        window.location.href = "./src/components/PlayList/PlayList.tsx";
-    }
-
-
+    };
 
     return (
         <>
