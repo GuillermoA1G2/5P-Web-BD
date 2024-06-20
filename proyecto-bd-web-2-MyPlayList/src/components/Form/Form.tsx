@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import {useNavigate} from 'react-router-dom';
 import "./Form.css";
 import Playlist from "../PlayList/PlayList";
 
@@ -52,13 +53,21 @@ function Form() {
         setPassword("");
     };
 
+    const navigate = useNavigate();
+    const handleClick = () => {
+        setTimeout(() => {
+            alert('Regresando al Inicio');
+            navigate('/');
+        }, 1500);
+    };
+
     return (
         <>
             {isLoggedIn ? (
                 <Playlist/>
             ) : (
                 <div className="login-box">
-                    <h2>Login</h2>
+                    <h2>Loggin</h2>
                     <form>
                         <div className="user-box">
                             <input
@@ -85,6 +94,7 @@ function Form() {
                         <button onClick={handleLogin} className="btn">Iniciar sesión</button>
                         <button onClick={handleRegister} className="btn">Registrarse</button>
                     </form>
+                    <button onClick={() => handleClick()} className="btnr">Regresar</button>
                 </div>
             )}
         </>

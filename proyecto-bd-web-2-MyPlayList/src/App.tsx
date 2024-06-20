@@ -2,17 +2,29 @@ import reactLogo from './assets/react.svg'
 import viteLogo from '/vite.svg'
 import './App.css'
 import CountButton from './components/CountButton';
-import Header from './components/Header';
+import { Routes, Route } from 'react-router-dom'
+import Inicio from './pages/Inicio';
+import Contacto from './pages/Contacto';
 import Form from './components/Form/Form';
+import Theater from './components/Theater';
+//import MenuPrincipal from './pages/MenuPrincipal'
+
+const isLogged = () => {
+  return true;
+}
 
 function App() {
   return (
     <main>
-        <Header title="Formulario de ingreso"/>
-        <Form />
-        <p>
-          Edit <code>src/App.tsx</code> and save to test HMR
-        </p>
+        <Routes>
+          <Route path='/' element={<Inicio/>}/>
+          <Route path='/contacto' element={<Contacto/>}/>
+          <Route path='/form' element={<Form/>}/>
+          <Route path='/theater' element={<Form/>}/>
+          {
+            isLogged() && <Route path='form' element={<Form/>}/>
+          }
+        </Routes>
     </main>
   )
 }
